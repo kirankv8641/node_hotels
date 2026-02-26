@@ -1,26 +1,26 @@
-const mongoose = require("mongoose"); 
+const mongoose = require('mongoose');
 
- 
- const mongoURL='mongodb+srv://kv878432_db_user:kirankv@cluster0.ocowqjk.mongodb.net/'
+// Use the environment variable `MONGO_URI` if provided (recommended),
+// otherwise fall back to a local MongoDB instance for development.
+const mongoURL = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/node_tutorial';
 
- mongoose.connect(mongoURL)
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+mongoose.connect(mongoURL)
+   .then(() => console.log('MongoDB Connected'))
+   .catch(err => console.error('MongoDB connection error:', err));
 
- const db=mongoose.connection;
+const db = mongoose.connection;
 
- //Define event listener for database connection
- db.on('connected', () => {
-    console.log('Connected to MongoDB server');
- });
+// Event listeners for connection state
+db.on('connected', () => {
+   console.log('Connected to MongoDB server');
+});
 
- db.on('error', (err) => {
-    console.log('MongoDB connection error:',err);
- });
+db.on('error', (err) => {
+   console.error('MongoDB connection error:', err);
+});
 
- db.on('disconnected', () => {
-    console.log(' MongoDB disconnected');
- });
+db.on('disconnected', () => {
+   console.log('MongoDB disconnected');
+});
 
- //Export the database connection
- module.exports=db;
+module.exports = db;
