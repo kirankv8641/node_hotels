@@ -211,6 +211,7 @@
 //     res.status(500).json({ error: 'Internal Server Error' });
 // }
 // })
+require('dotenv').config();
 const express = require('express');
 
 const app = express();
@@ -218,6 +219,7 @@ const db = require('./db');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+const PORT = process.env.PORT || 3000;
 
 // const Person = require('./models/person');
 const MenuItem = require('./models/MenuItem');
