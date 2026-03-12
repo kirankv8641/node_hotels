@@ -3,11 +3,11 @@ dns.setServers(['8.8.8.8', '8.8.4.4']);
 const mongoose = require('mongoose');
 
 
-// const mongoURL= process.env.MONGO_URI_LOCAL //rEPLACE my database with ur db name
+  const mongoURL= process.env.MONGO_URI_LOCAL //rEPLACE my database with ur db name
 // Use the environment variable `MONGO_URI` if provided (recommended),
 // otherwise fall back to a local MongoDB instance for development.
-const localURL = 'mongodb://127.0.0.1:27017/node_tutorial';
-const mongoURL = process.env.MONGO_URI || localURL;
+// const localURL = 'mongodb://127.0.0.1:27017/node_tutorial';
+// const mongoURL = process.env.MONGO_URI || localURL;
 
 const connOptions = (uri) => ({
    serverSelectionTimeoutMS: 5000,

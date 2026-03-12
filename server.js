@@ -213,19 +213,28 @@
 // })
 require('dotenv').config();
 const express = require('express');
-
 const app = express();
 const db = require('./db');
+const MenuItem = require('./models/MenuItem');
+const passport = require('./auth');
+
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
 
-// const Person = require('./models/person');
-const MenuItem = require('./models/MenuItem');
 
+//Middleware function
+const logRequest=(req,res,next)=>{
+  console.log(`${new Date().toLocaleString()} - Request made to : ${req.originalUrl}`);
+  next();//Move on to new phase
+}
+ app.use(logRequest);//Apply the middleware to all routes
 
-app.get('/', (req, res) => {
+app.use(passport.initialize());
+const localAuthMiddleware=passport.authenticate('local',{session:false});
+
+app.get('/',(req, res) => {
   res.send('Welcome to our Hotel');
 })
 //Import the router files
